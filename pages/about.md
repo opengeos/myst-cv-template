@@ -1,24 +1,33 @@
 ---
 title: About
-abstract: ""
-exports:
-  - format: typst
-    template: lapreprint-typst
-    output: _build/exports/typst/
+description: Biography, education, and academic appointments of Jane Doe.
+keywords:
+  - About
+  - Biography
+  - Education
+  - Appointments
 ---
 
-# Preface
+# About
 
-Welcome to this book. This preface provides an overview of what you will learn.
+Dr. Jane Doe is an Assistant Professor in the Department of Computer Science at Example University. Her research focuses on developing open-source tools for data science and machine learning. She is the creator and maintainer of several widely used open-source Python packages. Dr. Doe's work bridges software engineering, data science, and artificial intelligence to make large-scale data analytics more accessible, reproducible, and intelligent.
 
-## Who This Book Is For
+---
 
-This book is for anyone interested in the topic.
+## Education
 
-## How to Use This Book
+| Year | Degree | Institution | Dissertation/Thesis |
+|------|--------|-------------|---------------------|
+| 2020 | **Ph.D.** in Computer Science | Example University, USA | *Scalable machine learning for large-scale data analysis* |
+| 2016 | **M.S.** in Computer Science | Example University, USA | *Distributed computing frameworks for data-intensive applications* |
+| 2014 | **B.S.** in Computer Science | Example College, USA | *Efficient algorithms for graph processing* |
 
-Each chapter builds on the previous one. Start from the beginning and work your way through.
+---
 
-## Acknowledgements
+## Appointments
 
-Thank you to everyone who contributed to this book.
+| Period | Position |
+|--------|----------|
+| 2023--present | Assistant Professor, Department of Computer Science, Example University |
+| 2020--2023 | Postdoctoral Researcher, Data Science Lab, Example Institute |
+| 2018--2020 | Research Assistant, Department of Computer Science, Example University |

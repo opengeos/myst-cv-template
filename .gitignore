@@ -109,6 +109,15 @@ ENV/
 _build/
 book-clean/
 
+# CV generation
+cv.typ
+cv.pdf
+fonts/
+
+# RSS/Atom feeds
+rss.xml
+atom.xml
+
 # Translation image directories (images are copied from pages/images/ at build time)
 book-*/images/
 

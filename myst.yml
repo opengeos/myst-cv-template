@@ -1,38 +1,67 @@
 version: 1
 project:
   title: Jane Doe
+  description: Personal website of Jane Doe, Assistant Professor at Example University, building open-source tools for data science.
+  # thumbnail: images/profile-thumbnail.webp
   # authors:
   #   - name: Jane Doe
+  #     email: jane.doe@example.com
+  #     orcid: 0000-0000-0000-0000
+  #     url: https://example.com
+  #     affiliations:
+  #       - Example University
   copyright: '2026'
+  keywords:
+    - Data Science
+    - Open-source Software
+    - Machine Learning
+  # github: username/repo
   exclude:
     - _build
     - Thumbs.db
     - .DS_Store
     - '**.ipynb_checkpoints'
-  github: opengeos/myst-cv-template
-  # thebe:
-  #   binder:
-  #     repo: opengeos/myst-cv-template
-  #     provider: github
-  #     url: https://mybinder.org
-  #     ref: main
-  bibliography:
-    - pages/references.bib
+    - cv.typ
+    - cv.pdf
+    - generate_cv.py
+    - generate_rss.py
+    - inject_comments.py
+    - rss.xml
+    - atom.xml
+    - fonts/**
+    - CONDUCT.md
+    - CONTRIBUTING.md
+    - README.md
   toc:
     - file: index.md
     - file: pages/about.md
     - file: pages/research.md
+    - file: pages/software.md
     - file: pages/teaching.md
+    - file: pages/talks.md
+    - file: pages/awards.md
     - file: pages/services.md
     - file: pages/contact.md
+    - file: pages/news.md
+    - file: pages/blog.md
+    - pattern: blog/*.md
+      hidden: true
 site:
   options:
     logo: logo.png
     logo_dark: logo.png
     favicon: fav.ico
-    folders: true
     style: custom.css
-    # analytics_google: G-XXX
+    # analytics_google: G-XXXXXXXXXX
+    folders: true
+  # actions:
+  #   - title: RSS
+  #     url: https://example.com/rss.xml
   template: book-theme
   parts:
     primary_sidebar_footer: ''
+    footer: |
+      [CV (PDF)](cv.pdf) |
+      [GitHub](https://github.com/username) |
+      [LinkedIn](https://www.linkedin.com/in/username) |
+      [Twitter](https://twitter.com/username)
