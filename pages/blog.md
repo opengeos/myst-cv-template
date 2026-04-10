@@ -25,7 +25,7 @@ Thoughts on data science, open-source software, and teaching.
 ::::{grid} 1 1 2 2
 
 :::{card} Getting Started with MyST Markdown for Academic Websites
-:link: ./blog/sample-post
+:link: /blog/sample-post
 April 1, 2026 -- A guide to building academic websites with MyST Markdown, including CV PDF generation, blog support, and automated deployment.
 :::
 

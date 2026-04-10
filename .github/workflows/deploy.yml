@@ -43,22 +43,6 @@ jobs:
       - name: Install MyST Markdown
         run: npm install -g mystmd
 
-      - name: Build HTML Assets
-        # Remove BASE_URL if using a custom domain (CNAME)
-        env:
-          BASE_URL: /${{ github.event.repository.name }}
-        run: myst build --html
-
-      - name: Generate RSS and Atom feeds
-        run: python generate_rss.py
-
-      # TODO: Update the URL below with your custom domain
-      - name: Rewrite localhost URLs in sitemap
-        run: |
-          if [ -f ./_build/html/sitemap.xml ]; then
-            sed -i 's|http://localhost:[0-9]*|https://example.com|g' ./_build/html/sitemap.xml
-          fi
-
       - name: Setup Typst
         uses: typst-community/setup-typst@v5
 
@@ -80,13 +64,28 @@ jobs:
       - name: Compile CV PDF
         run: typst compile cv.typ cv.pdf --font-path ./fonts --ignore-system-fonts
 
+      - name: Build HTML Assets
+        # Remove BASE_URL if using a custom domain (CNAME)
+        env:
+          BASE_URL: /${{ github.event.repository.name }}
+        run: myst build --html
+
+      - name: Generate RSS and Atom feeds
+        run: python generate_rss.py
+
+      # TODO: Update the URL below with your custom domain
+      - name: Rewrite localhost URLs in sitemap
+        run: |
+          if [ -f ./_build/html/sitemap.xml ]; then
+            sed -i 's|http://localhost:[0-9]*|https://example.com|g' ./_build/html/sitemap.xml
+          fi
+
       - name: Inject Giscus comments into blog posts
         run: python inject_comments.py
 
       - name: Copy static files
         run: |
           cp CNAME ./_build/html/ 2>/dev/null || true
-          cp cv.pdf ./_build/html/cv.pdf
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

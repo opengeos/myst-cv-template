@@ -61,7 +61,7 @@ site:
   parts:
     primary_sidebar_footer: ''
     footer: |
-      [CV (PDF)](./cv.pdf) |
+      [CV (PDF)](cv.pdf) |
       [GitHub](https://github.com/username) |
       [LinkedIn](https://www.linkedin.com/in/username) |
       [Twitter](https://twitter.com/username)
