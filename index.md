@@ -20,7 +20,7 @@ description: Jane Doe, Assistant Professor at Example University, builds open-so
 :::{grid-item}
 :columns: 12 12 8 8
 
-**Assistant Professor** | **Data Scientist**
+**Software Engineer** | **Data Scientist**
 
 [Department of Computer Science](https://example.com/cs), Example University
 
