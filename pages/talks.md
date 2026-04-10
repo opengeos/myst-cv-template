@@ -47,9 +47,9 @@ Dr. Doe regularly gives talks, workshops, and keynote presentations at conferenc
 
 ## Conference Proceedings
 
-1. **J. Doe**, A. Smith. "Efficient distributed computing for large-scale data." *Proceedings of the International Conference on Data Engineering (ICDE)*. 2025.
+**J. Doe**, A. Smith. "Efficient distributed computing for large-scale data." *Proceedings of the International Conference on Data Engineering (ICDE)*. 2025.
 
-2. B. Johnson, **J. Doe**. "Neural network architectures for spatial data." *Proceedings of the AAAI Conference on Artificial Intelligence*. 2024.
+B. Johnson, **J. Doe**. "Neural network architectures for spatial data." *Proceedings of the AAAI Conference on Artificial Intelligence*. 2024.
 
 ---
 
