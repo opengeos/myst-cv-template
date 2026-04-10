@@ -1,35 +1,30 @@
 version: 1
 project:
-  title: Website Title
+  title: Jane Doe
   # authors:
-  #   - name: Author Name
+  #   - name: Jane Doe
   copyright: '2026'
   exclude:
     - _build
     - Thumbs.db
     - .DS_Store
     - '**.ipynb_checkpoints'
-  github: opengeos/myst-website-template
-  thebe:
-    binder:
-      repo: opengeos/myst-website-template
-      provider: github
-      url: https://mybinder.org
-      ref: main
+  github: opengeos/myst-cv-template
+  # thebe:
+  #   binder:
+  #     repo: opengeos/myst-cv-template
+  #     provider: github
+  #     url: https://mybinder.org
+  #     ref: main
   bibliography:
-    - book/references.bib
+    - pages/references.bib
   toc:
     - file: index.md
-    - title: Preface
-      children:
-        - file: book/preface.md
-    - title: Getting Started
-      children:
-        - file: book/part01/getting-started.md
-        - file: book/part01/installation.md
-    - title: Examples
-      children:
-        - file: book/part02/first-example.md
+    - file: pages/about.md
+    - file: pages/research.md
+    - file: pages/teaching.md
+    - file: pages/services.md
+    - file: pages/contact.md
 site:
   options:
     logo: logo.png

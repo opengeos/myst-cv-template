@@ -109,7 +109,7 @@ ENV/
 _build/
 book-clean/
 
-# Translation image directories (images are copied from book/images/ at build time)
+# Translation image directories (images are copied from pages/images/ at build time)
 book-*/images/
 
 # Large data files

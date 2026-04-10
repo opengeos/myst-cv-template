@@ -1,41 +1,19 @@
 ---
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
-title: First Example
+title: Services
 abstract: ""
-authors:
-  - name: Author Name
 exports:
   - format: typst
     template: lapreprint-typst
     output: _build/exports/typst/
 ---
 
-# First Example
+# Services
 
-This chapter walks through a complete example.
+This chapter covers my services.
 
-## Setting Up
+## Overview
 
-Describe the setup steps here.
-
-## Sample Figure
-
-{numref}`fig-sample` shows a sample bar chart generated with Matplotlib.
-
-```{figure} ../images/sample_figure.png
-:name: fig-sample
-:alt: A sample bar chart
-
-A sample bar chart showing values for five categories.
-```
+Provide an overview of the topic here.
 
 ## Sample Dropdown
 
