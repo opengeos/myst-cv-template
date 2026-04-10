@@ -32,6 +32,7 @@ A reusable template for building academic CV websites with [MyST Markdown](https
 ├── generate_cv.py              # CV PDF generation script
 ├── generate_rss.py             # RSS/Atom feed generation script
 ├── inject_comments.py          # Giscus comment injection script
+├── Dockerfile                  # Docker build for full site
 ├── logo.png                    # Site logo
 ├── fav.ico                     # Favicon
 ├── CNAME                       # Custom domain (optional)
@@ -143,6 +144,17 @@ python generate_rss.py
 ```
 
 Reads frontmatter from `blog/*.md` and writes `rss.xml` and `atom.xml`.
+
+### Building with Docker
+
+Build and serve the site without installing any dependencies locally:
+
+```bash
+docker build -t myst-cv-template .
+docker run --rm -p 3000:3000 -p 3100:3100 myst-cv-template
+```
+
+Then open http://localhost:3000 in your browser. If port 3000 is already in use, map to different ports (e.g., `-p 3001:3000 -p 3101:3100` and open http://localhost:3001). The Docker image includes Node.js, Python, Typst, and all required fonts.
 
 ## Deployment
 

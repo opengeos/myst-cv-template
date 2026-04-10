@@ -1,0 +1,10 @@
+_build/
+.git/
+node_modules/
+fonts/
+*.pdf
+*.typ
+*.zip
+.venv/
+venv/
+__pycache__/
