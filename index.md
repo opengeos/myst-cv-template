@@ -30,7 +30,7 @@ description: Jane Doe, Assistant Professor at Example University, builds open-so
 
 **Research Interests:** Data Science, Machine Learning, Open-Source Software Development, Cloud Computing
 
-[CV (PDF)](cv.pdf) |
+[CV (PDF)](./cv.pdf) |
 [Google Scholar](https://scholar.google.com) |
 [ORCID](https://orcid.org/0000-0000-0000-0000) |
 [LinkedIn](https://www.linkedin.com/in/username) |
