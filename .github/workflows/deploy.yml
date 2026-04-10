@@ -33,19 +33,57 @@ jobs:
         with:
           node-version: 18.x
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: pip install feedgen pyyaml
+
       - name: Install MyST Markdown
         run: npm install -g mystmd
 
       - name: Build HTML Assets
-        # Remove BASE_URL if using a custom domain (CNAME)
-        env:
-          BASE_URL: /${{ github.event.repository.name }}
         run: myst build --html
 
-      # - name: Copy static files
-      #   run: |
-      #     cp robots.txt ./_build/html/
-      #     # cp CNAME ./_build/html/
+      - name: Generate RSS and Atom feeds
+        run: python generate_rss.py
+
+      # TODO: Update the URL below with your custom domain
+      - name: Rewrite localhost URLs in sitemap
+        run: |
+          if [ -f ./_build/html/sitemap.xml ]; then
+            sed -i 's|http://localhost:[0-9]*|https://example.com|g' ./_build/html/sitemap.xml
+          fi
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v5
+
+      - name: Download fonts
+        run: |
+          mkdir -p fonts
+          # Source Sans Pro (body font)
+          curl -sL "https://github.com/adobe-fonts/source-sans-pro/releases/download/3.006R/source-sans-pro-3.006R.zip" -o source-sans-pro.zip
+          unzip -o source-sans-pro.zip -d /tmp/ssp
+          cp /tmp/ssp/source-sans-pro-3.006R/OTF/*.otf fonts/
+          # Font Awesome 6 (icons)
+          curl -sL "https://use.fontawesome.com/releases/v6.7.2/fontawesome-free-6.7.2-desktop.zip" -o fa.zip
+          unzip -o fa.zip -d /tmp/fa
+          cp /tmp/fa/fontawesome-free-6.7.2-desktop/otfs/*.otf fonts/
+
+      - name: Generate CV Typst source
+        run: python generate_cv.py
+
+      - name: Compile CV PDF
+        run: typst compile cv.typ cv.pdf --font-path ./fonts --ignore-system-fonts
+
+      - name: Inject Giscus comments into blog posts
+        run: python inject_comments.py
+
+      - name: Copy static files
+        run: |
+          cp CNAME ./_build/html/ 2>/dev/null || true
+          cp cv.pdf ./_build/html/cv.pdf
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

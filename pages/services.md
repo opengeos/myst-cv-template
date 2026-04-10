@@ -1,56 +1,57 @@
 ---
 title: Services
-abstract: ""
-exports:
-  - format: typst
-    template: lapreprint-typst
-    output: _build/exports/typst/
+description: Professional and institutional service activities.
+keywords:
+  - Editorial Services
+  - Peer Review
+  - Committees
+  - Professional Service
 ---
 
 # Services
 
-This chapter covers my services.
+Dr. Doe serves the academic community through editorial roles, proposal review, conference organization, and institutional leadership.
 
-## Overview
+## Professional Services
 
-Provide an overview of the topic here.
+| Period | Role |
+|--------|------|
+| 2024--present | Associate Editor, *Journal of Data Science* |
+| 2023--present | Program Committee Member, International Conference on Machine Learning (ICML) |
+| 2022--present | Reviewer, *Nature Methods*, *IEEE TPAMI*, *JMLR* |
 
-## Sample Dropdown
+---
 
-:::{dropdown} 2025
-:open:
+## Institutional Services
 
-- Item 1
-- Item 2
-- Item 3
+### Department of Computer Science, Example University
 
-:::
+| Period | Role |
+|--------|------|
+| 2025--present | Graduate Admissions Committee Chair |
+| 2024--present | Curriculum Committee Member |
+| 2023--present | Seminar Series Organizer |
 
-:::{dropdown} 2024
+### College of Sciences, Example University
 
-- Item 1
-- Item 2
-- Item 3
+| Period | Role |
+|--------|------|
+| 2024--present | Research Computing Advisory Board Member |
+| 2023--2024 | Faculty Search Committee Member |
 
-:::
+---
 
-## Running the Example
+## Disciplinary Services
 
-```{code-cell} ipython3
-import numpy as np
-import matplotlib.pyplot as plt
+### Conference Organization
 
-x = np.linspace(0, 2 * np.pi, 100)
-y = np.sin(x)
+| Year | Role |
+|------|------|
+| 2026 | Session Chair, International Data Science Conference |
+| 2025 | Workshop Organizer, PyCon |
+| 2024 | Program Committee, SciPy Conference |
 
-fig, ax = plt.subplots()
-ax.plot(x, y)
-ax.set_xlabel("x")
-ax.set_ylabel("sin(x)")
-ax.set_title("A Simple Plot")
-plt.show()
-```
+### Proposal Review
 
-## Summary
-
-This example demonstrated the basic workflow.
+- NSF Panel Reviewer (2024, 2025)
+- DOE Proposal Reviewer (2023)

@@ -18,7 +18,9 @@ table th:first-child {
 }
 
 #featured-projects + .myst-grid .myst-card-footer,
-#featured-projects + .myst-grid .myst-card-title {
+#featured-projects + .myst-grid .myst-card-title,
+.sponsors-grid .myst-card-footer,
+.sponsors-grid .myst-card-title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,12 +30,43 @@ table th:first-child {
   white-space: nowrap;
 }
 
+#featured-projects + .myst-grid .myst-card-footer {
+  flex-direction: column;
+  white-space: normal;
+}
+
+#featured-projects + .myst-grid .myst-card-footer img {
+  height: 20px;
+  vertical-align: middle;
+  margin: 2px 2px 0 2px;
+}
+
 #featured-projects + .myst-grid .myst-card-footer > *,
-#featured-projects + .myst-grid .myst-card-title > * {
+#featured-projects + .myst-grid .myst-card-title > *,
+.sponsors-grid .myst-card-footer > *,
+.sponsors-grid .myst-card-title > * {
   text-align: center !important;
 }
 
 #featured-projects + .myst-grid .myst-card-footer p,
-#featured-projects + .myst-grid .myst-card-footer strong {
+#featured-projects + .myst-grid .myst-card-footer strong,
+.sponsors-grid .myst-card-footer p,
+.sponsors-grid .myst-card-footer strong {
   margin: 0 auto;
+}
+
+.sponsors-grid .myst-card-body,
+#featured-projects + .myst-grid .myst-card-body {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sponsors-grid .myst-card-body img,
+#featured-projects + .myst-grid .myst-card-body img {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
 }
