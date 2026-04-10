@@ -83,9 +83,12 @@ jobs:
       - name: Inject Giscus comments into blog posts
         run: python inject_comments.py
 
-      - name: Copy static files
+      - name: Copy static files and rewrite CV URL to stable path
         run: |
           cp CNAME ./_build/html/ 2>/dev/null || true
+          cp cv.pdf ./_build/html/cv.pdf
+          # Rewrite hashed CV URL to stable /cv.pdf path
+          find ./_build/html -name "*.html" -exec sed -i 's|/build/cv-[a-f0-9]\{20,\}\.pdf|/cv.pdf|g' {} \;
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
