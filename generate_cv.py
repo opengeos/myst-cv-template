@@ -12,7 +12,6 @@ Output: cv.typ (compile with: typst compile cv.typ cv.pdf --font-path ./fonts)
 import re
 from pathlib import Path
 
-
 # ============================================================================
 # Utility functions
 # ============================================================================
