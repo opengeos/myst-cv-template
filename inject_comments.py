@@ -11,16 +11,63 @@ Usage: python inject_comments.py
 
 from pathlib import Path
 
+LIGHT_THEME_FILE = "giscus-light.css"
+
 # TODO: Update these values with your Giscus configuration from https://giscus.app
 GISCUS_SNIPPET = """
 <script>
 (function() {
-  function getGiscusTheme() {
-    var theme = document.documentElement.getAttribute('data-theme');
-    if (!theme) {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  function getSiteTheme() {
+    var root = document.documentElement;
+    if (root.classList.contains('dark')) {
+      return 'dark';
     }
-    return (theme === 'dark') ? 'dark' : 'light';
+    if (root.classList.contains('light')) {
+      return 'light';
+    }
+
+    var savedTheme = localStorage.getItem('myst:theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      return savedTheme;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function getSiteRootUrl() {
+    var marker = '/blog/';
+    var pathname = window.location.pathname;
+    var markerIndex = pathname.indexOf(marker);
+    var rootPath = markerIndex === -1 ? '/' : pathname.slice(0, markerIndex + 1);
+    return window.location.origin + rootPath;
+  }
+
+  function getGiscusTheme() {
+    if (getSiteTheme() === 'dark') {
+      return 'dark';
+    }
+    return getSiteRootUrl() + 'giscus-light.css';
+  }
+
+  function syncGiscusTheme() {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe || !iframe.contentWindow) return false;
+
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: getGiscusTheme() } } },
+      'https://giscus.app'
+    );
+    return true;
+  }
+
+  function waitForGiscusFrame() {
+    var attempts = 0;
+    var timer = setInterval(function() {
+      attempts++;
+      if (syncGiscusTheme() || attempts > 60) {
+        clearInterval(timer);
+      }
+    }, 250);
   }
 
   function initGiscus() {
@@ -39,11 +86,11 @@ GISCUS_SNIPPET = """
 
     var s = document.createElement('script');
     s.src = 'https://giscus.app/client.js';
-    s.setAttribute('data-repo', 'username/repo');           // TODO: Update
-    s.setAttribute('data-repo-id', 'R_XXXXXXXXXX');         // TODO: Update
+    s.setAttribute('data-repo', 'opengeos/myst-cv-template');           // TODO: Update
+    s.setAttribute('data-repo-id', 'R_kgDOR-orJg');         // TODO: Update
     s.setAttribute('data-category', 'General');              // TODO: Update
-    s.setAttribute('data-category-id', 'DIC_XXXXXXXXXX');   // TODO: Update
-    s.setAttribute('data-mapping', 'url');
+    s.setAttribute('data-category-id', 'DIC_kwDOR-orJs4C6gKZ');   // TODO: Update
+    s.setAttribute('data-mapping', 'pathname');
     s.setAttribute('data-strict', '0');
     s.setAttribute('data-reactions-enabled', '1');
     s.setAttribute('data-emit-metadata', '0');
@@ -53,36 +100,65 @@ GISCUS_SNIPPET = """
     s.setAttribute('crossorigin', 'anonymous');
     s.async = true;
     container.appendChild(s);
+    waitForGiscusFrame();
     return true;
   }
 
   // Retry until React has finished rendering the article content
-  var attempts = 0;
-  var timer = setInterval(function() {
-    attempts++;
-    if (initGiscus() || attempts > 50) clearInterval(timer);
-  }, 200);
+  function tryInit() {
+    var attempts = 0;
+    var timer = setInterval(function() {
+      attempts++;
+      if (initGiscus() || attempts > 100) clearInterval(timer);
+    }, 300);
+  }
+  tryInit();
+
+  // Re-initialize on SPA navigation (MyST book theme uses client-side routing)
+  var lastUrl = location.href;
+  var navObserver = new MutationObserver(function() {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      if (location.pathname.indexOf('/blog/') !== -1) {
+        tryInit();
+      }
+    }
+  });
+  navObserver.observe(document.body, { childList: true, subtree: true });
 
   // Update Giscus theme when the site theme toggles
   var observer = new MutationObserver(function() {
-    var iframe = document.querySelector('iframe.giscus-frame');
-    if (iframe) {
-      iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: getGiscusTheme() } } },
-        'https://giscus.app'
-      );
-    }
+    syncGiscusTheme();
   });
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 })();
 </script>
 """
+
+
+def copy_theme_asset(build_dir: Path) -> None:
+    """Copy the custom light theme into the built site."""
+    source = Path(__file__).parent / LIGHT_THEME_FILE
+    target = build_dir / LIGHT_THEME_FILE
+
+    if not source.exists():
+        print(f"Theme file not found: {source}")
+        return
+
+    target.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
+    print(f"Copied {LIGHT_THEME_FILE} to {target}")
 
 
 def main():
     """Inject Giscus comments into blog post HTML files."""
     build_dir = Path(__file__).parent / "_build" / "html"
     blog_dir = build_dir / "blog"
+
+    if not build_dir.exists():
+        print(f"No build directory found at {build_dir}")
+        return
+
+    copy_theme_asset(build_dir)
 
     if not blog_dir.exists():
         print(f"No blog directory found at {blog_dir}")
