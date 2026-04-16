@@ -11,7 +11,6 @@ Usage: python inject_comments.py
 
 from pathlib import Path
 
-
 LIGHT_THEME_FILE = "giscus-light.css"
 
 # TODO: Update these values with your Giscus configuration from https://giscus.app
