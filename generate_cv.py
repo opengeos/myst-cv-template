@@ -13,6 +13,32 @@ import re
 from pathlib import Path
 
 # ============================================================================
+# Configuration
+# ============================================================================
+
+# Fonts used when compiling the CV PDF. These must be available in the font
+# path passed to Typst (see the "Compile CV PDF" step in
+# .github/workflows/deploy.yml, which uses `--font-path ./fonts
+# --ignore-system-fonts`). To use a font that isn't already bundled, add its
+# .otf/.ttf files to that "Download fonts" step (and the Dockerfile) first,
+# then reference the exact family name here.
+#
+# CV_FONT is the body-text font. CV_HEADER_FONT controls the author's name in
+# the header (modern-cv styles the name with `header-font`, so a plain
+# `#set text(...)` in the preamble will not change it).
+CV_FONT = ("Source Sans Pro",)
+CV_HEADER_FONT = "Source Sans Pro"
+
+
+def _typst_font_value(font):
+    """Render a font config value as Typst source (a string or an array)."""
+    if isinstance(font, str):
+        return f'"{font}"'
+    inner = ", ".join(f'"{f}"' for f in font)
+    return f"({inner},)" if len(tuple(font)) == 1 else f"({inner})"
+
+
+# ============================================================================
 # Utility functions
 # ============================================================================
 
@@ -235,14 +261,17 @@ def gen_preamble():
     """Generate Typst preamble with modern-cv import and author config.
 
     TODO: Update author information below with your own details.
+    To change the fonts, edit CV_FONT / CV_HEADER_FONT at the top of this file.
     """
-    return """#import "@preview/modern-cv:0.9.0": *
+    return f"""#import "@preview/modern-cv:0.9.0": *
 
 // Use Font Awesome 6 icons and replace "Résumé" with "CV" in footer
 #fa-version("6")
 #show "Résumé": "CV"
 
 #show: resume.with(
+  font: {_typst_font_value(CV_FONT)},
+  header-font: {_typst_font_value(CV_HEADER_FONT)},
   author: (
     firstname: "Jane",
     lastname: "Doe",
